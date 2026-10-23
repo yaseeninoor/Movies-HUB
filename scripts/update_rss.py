@@ -100,7 +100,9 @@ def main():
                 "description": safe_text(text_of(node, {"description", "summary", "subtitle", "encoded"}), 320),
                 "published": safe_text(text_of(node, {"pubdate", "published", "updated", "date"}), 80),
                 "categories": [c for c in categories if c][:5],
-                "image": item_image(node)
+                "image": item_image(node),
+                "mediaUrl": item_media(node),
+                "embedUrl": item_embed(node)
             })
             if len(result["items"]) >= MAX_ITEMS:
                 break
