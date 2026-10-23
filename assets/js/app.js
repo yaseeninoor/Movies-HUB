@@ -15,7 +15,7 @@ const defaultVideos=[
 const savedCustomVideos=(()=>{try{return JSON.parse(localStorage.getItem("loopCustomVideos")||"[]")}catch{return []}})();
 const videos=[...defaultVideos,...savedCustomVideos];
 const shortGrid=document.getElementById("shortsGrid"),fullGrid=document.getElementById("fullGrid"),searchInput=document.getElementById("searchInput");
-let activeKind="all",activeCategory="",query="";
+let activeKind="all",activeCategory="",query="",sortMode="featured";
 const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function openVideo(id){
  const v=videos.find(x=>x.id===Number(id));if(!v)return;
@@ -35,7 +35,12 @@ function card(v,short){
  return '<article class="'+(short?"short-card":"full-card")+'"><button class="'+(short?"short-thumb":"full-thumb")+'" data-play="'+v.id+'" style="--video-accent:'+safe(v.accent||"#ed3b35")+'" aria-label="Play '+safe(v.title)+'"><span class="thumb-icon">'+icon+'</span><span class="thumb-label">'+safe(v.badge||v.category.toUpperCase())+'</span><span class="thumb-play">▶</span><span class="thumb-duration">'+safe(v.duration)+'</span></button><div class="video-card-info"><div class="video-category">'+safe(v.category)+' <span>·</span> '+safe(v.language)+'</div><h3>'+safe(v.title)+'</h3><p>'+safe(v.description)+'</p><button class="watch-now" data-play="'+v.id+'">▶ '+(v.type==="search"?"Find videos":"Play video")+' <span>↗</span></button></div></article>';
 }
 function render(){
- const filtered=videos.filter(v=>(activeKind==="all"||v.kind===activeKind)&&(!activeCategory||v.category.toLowerCase()===activeCategory.toLowerCase())&&(!query||[v.title,v.category,v.language,v.description].join(" ").toLowerCase().includes(query)));
+ let filtered=videos.filter(v=>(activeKind==="all"||v.kind===activeKind)&&(!activeCategory||v.category.toLowerCase()===activeCategory.toLowerCase())&&(!query||[v.title,v.category,v.language,v.description].join(" ").toLowerCase().includes(query)));
+ if(sortMode==="title")filtered.sort((a,b)=>a.title.localeCompare(b.title));
+ else if(sortMode==="category")filtered.sort((a,b)=>a.category.localeCompare(b.category)||a.title.localeCompare(b.title));
+ else if(sortMode==="newest")filtered.sort((a,b)=>Number(b.id)-Number(a.id));
+ const count=document.getElementById("libraryCount");
+ if(count)count.textContent=filtered.length+" items · "+(activeCategory||({all:"all formats",short:"shorts",full:"full videos"}[activeKind]||"all formats"));
  shortGrid.innerHTML=filtered.filter(v=>v.kind==="short").map(v=>card(v,true)).join("");
  fullGrid.innerHTML=filtered.filter(v=>v.kind==="full").map(v=>card(v,false)).join("");
  document.querySelectorAll(".video-section").forEach(section=>{section.classList.remove("section-dimmed");section.hidden=(activeKind==="short"&&section.id==="full-videos")||(activeKind==="full"&&section.id==="shorts");});
@@ -54,6 +59,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closePlayer()});
 searchInput.addEventListener("input",()=>{query=searchInput.value.trim().toLowerCase();render()});
 document.getElementById("clearSearch").addEventListener("click",()=>{searchInput.value="";query="";activeCategory="";activeKind="all";document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x.dataset.kind==="all"));document.querySelectorAll("[data-category]").forEach(x=>x.classList.remove("category-selected"));render();searchInput.focus()});
 document.getElementById("searchToggle").addEventListener("click",()=>{searchInput.focus();document.getElementById("searchPanel").scrollIntoView({behavior:"smooth",block:"center"})});
+const sortVideos=document.getElementById("sortVideos");
+if(sortVideos)sortVideos.addEventListener("change",()=>{sortMode=sortVideos.value;render()});
 const menuToggle=document.getElementById("menuToggle"),mainNav=document.getElementById("mainNav");
 if(menuToggle&&mainNav){menuToggle.addEventListener("click",()=>{const open=mainNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu")});mainNav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mainNav.classList.remove("menu-open");menuToggle.setAttribute("aria-expanded","false")}))}
 document.querySelectorAll(".mobile-bottom-nav a").forEach(a=>a.addEventListener("click",()=>document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===a))));
