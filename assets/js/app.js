@@ -68,9 +68,9 @@ document.getElementById("addVideoForm").addEventListener("submit",e=>{
  let url;try{url=new URL(raw)}catch{status.textContent="Please enter a valid URL.";return}
  if(url.protocol!=="https:"){status.textContent="For safety, use an HTTPS video or embed URL.";return}
  let type="iframe",src=url.href,videoId="";
- if(/\\.(mp4|webm|ogg)(?:$|\\?)/i.test(url.pathname))type="mp4";
- else if(/(^|\\.)youtu\\.be$/i.test(url.hostname)){videoId=url.pathname.slice(1);type="youtube";src=""}
- else if(/(^|\\.)youtube\\.com$/i.test(url.hostname)){
+ if(/\.(mp4|webm|ogg)(?:$|\?)/i.test(url.pathname))type="mp4";
+ else if(/(^|\.)youtu\.be$/i.test(url.hostname)){videoId=url.pathname.slice(1);type="youtube";src=""}
+ else if(/(^|\.)youtube\.com$/i.test(url.hostname)){
    if(url.pathname==="/watch")videoId=url.searchParams.get("v")||"";
    else if(url.pathname.startsWith("/embed/"))videoId=url.pathname.split("/")[2]||"";
    else if(url.pathname.startsWith("/shorts/"))videoId=url.pathname.split("/")[2]||"";
