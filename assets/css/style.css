@@ -21,3 +21,48 @@
  .language-section{padding-top:35px}
  .language-card{min-height:62px}
 }
+
+/* BOLD CINEMA RED + GOLD THEME */
+:root{--bg:#100907;--panel:#1b100e;--panel2:#251512;--text:#fff8ec;--muted:#c3a99c;--blue:#ffca45;--cyan:#ff5144;--line:rgba(255,190,74,.17)}
+body{background:radial-gradient(ellipse at 80% 0%,#41140f 0,transparent 38%),#100907;color:#fff8ec}
+.ambient-one{background:#ff3026;opacity:.15}.ambient-two{background:#ffbd2e;opacity:.12}
+.topbar{background:rgba(16,9,7,.88);border-bottom-color:#ffbd2e26}
+.brand-mark{background:linear-gradient(145deg,#ffda58,#ef382b);color:#260a05;box-shadow:0 7px 24px #f443362e}.brand-mark span{color:#a51e16}.brand-muted{color:#ffbd36}
+.desktop-nav a.active{box-shadow:inset 0 -2px #ffbd36}.desktop-nav a:hover,.desktop-nav a.active{color:#ffe8b0}
+.eyebrow,.section-overline{color:#ffc84a}.live-dot{background:#ff493b;box-shadow:0 0 13px #ff493b}
+h1 span{background:linear-gradient(100deg,#ffe36b 0%,#ff8c35 48%,#ff433b 100%);color:transparent;background-clip:text}
+.button-primary{color:#260a05;background:linear-gradient(110deg,#ffe36b,#ffb52d 48%,#ff5144);box-shadow:0 8px 26px #f44a302b}
+.button-ghost{border-color:#6b3527;color:#ffebd6;background:#21110e}
+.search-panel{border-color:#79332280;background:linear-gradient(100deg,#24120e,#160b09);box-shadow:0 18px 50px #0005}
+.search-icon{color:#ffc84a}.search-panel input{color:#fff8ec}.search-panel input::placeholder{color:#a98a7c}
+.filter-chip{border-color:#503027;background:#1c100d;color:#d2b6a7}.filter-chip:hover,.filter-chip.selected{background:linear-gradient(120deg,#542018,#7b261b);border-color:#ffbd36;color:#ffe7a3}
+.movie-poster{border-color:#ffbd362b;background:#27100d}.poster-placeholder{background:radial-gradient(ellipse at 50% 25%,var(--poster-accent,#ed3b35),transparent 57%),linear-gradient(145deg,#3a1710,#120908 85%)}
+.poster-placeholder:after{background:linear-gradient(0deg,#100907 0%,transparent 70%)}
+.movie-badge{border-color:#ffc74b66;background:#1a0c0bcf;color:#ffe7a1}
+.save-button{border-color:#ffcf6a70;background:#1b0c0bcc}.save-button.saved{color:#ffcf42;background:#4a1711}
+.movie-rating{color:#ffd65d}.text-link{color:#ffcf62}
+.language-card{border-color:#4b2b22;background:#1d100d}.language-card:hover,.language-card.selected{border-color:#ffbf35;background:#321710}
+.language-symbol{background:linear-gradient(145deg,#70291c,#31130f);color:#ffdb69}
+.watch-section{border-color:#80342399;background:radial-gradient(ellipse at 0 50%,#69211699,transparent 65%),#1c100d}
+.watch-icon{background:linear-gradient(140deg,#ffe36b,#ffb52d 55%,#ff5144);color:#260a05}
+footer{border-top-color:#ffbd3626}.profile-dot{border-color:#ffbd36;color:#ffdf82}
+.menu-toggle{border-color:#6b3527;background:#21110e}.menu-toggle span{background:#ffdc7b}
+@media(max-width:620px){.desktop-nav{background:rgba(25,12,9,.98);border-color:#6b3527}.desktop-nav a.active{background:#482018}.mobile-bottom-nav{border-color:#713321;background:rgba(24,10,8,.96)}.mobile-bottom-nav a.bottom-active,.mobile-bottom-nav a:focus,.mobile-bottom-nav a:hover{color:#ffe17a;background:#4a1c13}}
+/* Reliable tap targets and movie actions */
+.poster-open{width:100%;padding:0;border:0;display:block;text-align:inherit;cursor:pointer;color:inherit;background:transparent}
+.movie-card{position:relative;cursor:default}
+.movie-card:hover .movie-poster{transform:translateY(-4px)}
+.movie-card>.save-button{top:10px;right:10px}
+.movie-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.small-action{display:inline-flex;align-items:center;justify-content:center;min-height:31px;padding:7px 9px;border-radius:8px;border:1px solid #6a3428;background:#24110d;color:#ffe0a0;font-size:10px;font-weight:700;cursor:pointer}
+.small-action:hover{border-color:#ffbf35;background:#4a1a11}
+.small-action.action-hot{border-color:#ffb72f;background:linear-gradient(110deg,#ffdb58,#ff9e27);color:#260a05}
+.movie-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px}
+.modal-backdrop{position:absolute;inset:0;background:#090403d9;backdrop-filter:blur(10px)}
+.modal-card{position:relative;z-index:1;width:min(720px,100%);max-height:90dvh;overflow:auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:26px;padding:28px;border:1px solid #ffbd3655;border-radius:22px;background:linear-gradient(145deg,#30140f,#170b09 72%);box-shadow:0 30px 100px #000b}
+.modal-close{position:absolute;right:12px;top:10px;width:38px;height:38px;border:1px solid #8c4731;border-radius:50%;background:#24100d;color:#ffe7b3;font-size:27px;cursor:pointer}
+.modal-poster{min-height:300px;border-radius:15px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;text-align:center;padding:18px;background:radial-gradient(ellipse at 50% 25%,var(--poster-accent),transparent 55%),linear-gradient(145deg,#47180f,#100806);border:1px solid #ffc54b36}
+.modal-poster span{font-size:48px;color:#ffe9b2;text-shadow:0 8px 30px #000}.modal-poster strong{font:800 27px Outfit,sans-serif;color:#fff5df}
+.modal-info{padding:16px 0}.modal-kicker{font-size:9px;letter-spacing:2px;color:#ffca48;font-weight:800}.modal-info h2{font:800 32px Outfit,sans-serif;margin:12px 35px 10px 0}.modal-meta{font-size:12px;color:#ffcf5d}.modal-info p{font-size:13px;line-height:1.8;color:#d0b7a9;margin:20px 0}.modal-action{display:flex;align-items:center;justify-content:center;margin:9px 0;padding:12px;border:1px solid #75402d;border-radius:10px;color:#ffe5b0;font-size:12px;font-weight:700;background:#25110d}.modal-action:hover{border-color:#ffca45}.modal-action.modal-primary{border:0;background:linear-gradient(110deg,#ffe36b,#ffb52d 55%,#ff5144);color:#250a05}.modal-info>small{display:block;color:#a98c7f;font-size:10px;line-height:1.6;margin-top:12px}
+body.modal-open{overflow:hidden}
+@media(max-width:620px){.movie-actions{gap:5px}.small-action{flex:1 1 auto;font-size:9px;padding:7px 6px}.modal-card{grid-template-columns:1fr;gap:16px;padding:18px;max-height:88dvh}.modal-poster{min-height:170px;max-height:210px}.modal-poster span{font-size:35px}.modal-poster strong{font-size:22px}.modal-info{padding:0}.modal-info h2{font-size:26px}.movie-grid{gap:25px 11px}}
