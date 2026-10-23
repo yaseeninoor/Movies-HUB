@@ -194,3 +194,33 @@ body.player-open{overflow:hidden}
 .loop-theme .mobile-bottom-nav{background:#121212f5;border-color:#333}
 .loop-theme .mobile-bottom-nav a.bottom-active,.loop-theme .mobile-bottom-nav a:hover{color:#fe2c55;background:#25161b}
 @media(max-width:620px){.loop-welcome{padding:35px 18px 20px;display:block}.loop-welcome h1{font-size:43px}.loop-welcome p{font-size:12px}.loop-live-card{width:100%;min-height:75px;margin-top:20px;display:grid;grid-template-columns:36px 1fr;grid-template-rows:auto auto;column-gap:11px;padding:13px}.loop-live-card>span{grid-row:1/3}.loop-live-card b{align-self:end}.loop-live-card small{align-self:start}.loop-theme .video-topbar .brand{font-size:13px}}
+
+
+/* LOOP TikTok-inspired blue refresh */
+.loop-theme{background:#080b12;color:#f7faff;--bg:#080b12;--panel:#101725;--panel2:#172236;--text:#f7faff;--muted:#a6b4c8;--blue:#1688ff;--cyan:#35d9ff;--line:#24334a}
+.loop-theme .video-topbar{background:rgba(8,11,18,.96);border-bottom:1px solid #1e2d43}
+.loop-theme .brand-mark{background:linear-gradient(135deg,#35d9ff,#1688ff);color:#06101d;box-shadow:0 0 24px #1688ff38}
+.loop-theme .brand-muted{color:#35d9ff}
+.loop-theme .desktop-nav a.active,.loop-theme .desktop-nav a:hover{color:#35d9ff;box-shadow:inset 0 -2px #1688ff}
+.loop-theme .icon-button,.loop-theme .menu-toggle{border-color:#263852;background:#111b2b;color:#f7faff}
+.loop-theme .menu-toggle span{background:#35d9ff}
+.loop-kicker{color:#35d9ff}.loop-kicker span{background:#1688ff;box-shadow:0 0 12px #1688ff}
+.loop-live-card{border-color:#263852;background:radial-gradient(circle at 90% 0,#1688ff32,transparent 55%),#101725;box-shadow:0 15px 40px #0007}
+.loop-live-card>span{background:#1688ff;color:white}
+.loop-theme .video-search{background:#101725;border-color:#263852}.loop-theme .video-search>span{color:#35d9ff}
+.loop-theme .video-tabs{background:#080b12ed;border-color:#1e2d43}
+.loop-theme .video-tab{background:#101725;border-color:#263852;color:#b6c4d8}
+.loop-theme .video-tab.active,.loop-theme .video-tab:hover{background:#1688ff;border-color:#1688ff;color:white}
+.loop-theme .section-overline{color:#35d9ff}.loop-theme .title-pill{background:#35d9ff;color:#06101d}
+.loop-theme .see-all{background:#101725;border-color:#263852;color:#35d9ff}
+.loop-theme .short-card,.loop-theme .full-card{background:#101725;border-color:#223149}
+.loop-theme .short-thumb,.loop-theme .full-thumb{background:radial-gradient(circle at 75% 18%,var(--video-accent,#1688ff),transparent 28%),radial-gradient(circle at 25% 75%,#35d9ff45,transparent 45%),linear-gradient(145deg,#172236,#080b12)}
+.loop-theme .thumb-icon{background:#080b12bb;color:#35d9ff}.loop-theme .thumb-play{background:#080b12aa;color:#fff}
+.loop-theme .short-card:hover .thumb-play,.loop-theme .full-card:hover .thumb-play{background:#1688ff;color:#fff}
+.loop-theme .video-category{color:#35d9ff}.loop-theme .watch-now{background:#172236;border-color:#2a3d59;color:#f5f8ff}
+.loop-theme .watch-now:hover{background:#1688ff;border-color:#1688ff;color:white}
+.loop-theme .category-section{border-top-color:#223149}.loop-theme .category-grid button{background:#101725;border-color:#223149;color:#fff}
+.loop-theme .category-grid button>span{background:#172236}.loop-theme .category-grid button:hover,.loop-theme .category-grid button.category-selected{border-color:#1688ff;background:#10233d}
+.loop-theme .video-player-modal .player-dialog{background:#101725;border-color:#263852}.loop-theme .player-close{background:#101725;border-color:#1688ff;color:white}
+.loop-theme .player-caption .section-overline{color:#35d9ff}.loop-theme .mobile-bottom-nav{background:#0c1220f5;border-color:#263852}
+.loop-theme .mobile-bottom-nav a.bottom-active,.loop-theme .mobile-bottom-nav a:hover{color:#35d9ff;background:#11223a}
