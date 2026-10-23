@@ -1,30 +1,24 @@
-# Movies Hub 🎬
+# Yaseenis Hub
 
-A responsive movie-discovery website with a cinematic dark-blue interface, searchable catalogue, genre filters, language browsing, trailer links, and a locally saved watchlist.
+Mobile-first Islamic digital resource hub for the Yaseenis ecosystem.
 
-## Features
-- Mobile-first responsive layout
-- Search by title, year, language, or genre
-- Genre and language filters
-- Browser-local favourites/watchlist
-- Trailer discovery links
-- Catalogue stored in `data/movies.json`
-- No build step or package installation required
+## Included
+- Tamil-first responsive homepage with resource-category search
+- Links to the Yaseenis website and PDF Hub
+- Progressive Web App manifest and service worker
+- Installable on supported mobile browsers; previously cached app shell can open offline
+- Search is currently over the category cards; external article/PDF content is not indexed inside this site yet
 
-## Run locally
-Open `index.html` in a browser, or use a static local server for best results (the JSON catalogue is loaded with fetch).
+## Publish with GitHub Pages
+1. Open **Settings → Pages** in this repository.
+2. Choose **Deploy from a branch**, branch `main`, folder `/ (root)`, then save.
+3. Wait for GitHub Pages to publish. Use the exact URL shown in Pages settings.
+4. For a custom domain, configure DNS and the custom domain in Pages settings. Do not assume the custom domain is connected until GitHub confirms it.
 
-## Deploy with GitHub Pages
-1. Open repository **Settings → Pages**.
-2. Under Build and deployment, choose **Deploy from a branch**.
-3. Select branch `main` and folder `/ (root)`, then save.
-4. Wait for the deployment URL shown in Settings → Pages.
+## Install on a phone
+- iPhone: open the published HTTPS site in Safari → Share → Add to Home Screen.
+- Android: open the published HTTPS site in Chrome → Install app / Add to Home screen.
+The install prompt appears only in supported browsers and after the site meets PWA requirements.
 
-## Add or update titles
-Edit `data/movies.json` and follow the existing JSON fields. Trailer links should point to official trailers or authorized sources. The initial catalogue is demo content; verify movie details and availability before publishing.
-
-## Copyright and streaming
-Movies Hub is a discovery catalogue. It does not host movie files or provide unauthorized copyrighted downloads. Use official trailers and licensed streaming or digital-store services. Metadata and imagery belong to their respective owners.
-
-## Optional next step: live metadata
-You can connect a movie metadata provider such as TMDB after configuring a permitted API key and following its attribution and usage terms. Do not commit API secrets to this public repository.
+## Content integration
+The homepage currently links to existing Yaseenis pages. To show actual article and PDF results in unified search, the sources must expose a reliable feed/API or be indexed into a catalogue. No copyrighted books or media are copied into this repository.
