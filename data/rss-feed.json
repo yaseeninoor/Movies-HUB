@@ -1,6 +1,7 @@
 {
-  "source": "https://www.tamilsexzone.com/feed/",
-  "updatedAt": null,
-  "status": "pending",
-  "items": []
+  "source": "",
+  "updatedAt": "2026-10-23T09:04:47.625883+00:00",
+  "items": [],
+  "status": "unavailable",
+  "message": "Feed could not be refreshed (ValueError). Check RSS_FEED_URL and source availability."
 }
