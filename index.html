@@ -1,67 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080d19">
-  <meta name="description" content="Movies Hub — discover films, explore trailers, and find where to watch.">
-  <title>Movies Hub — Discover Your Next Movie</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#130907"><meta name="description" content="Short videos, movie clips, trailers and full-length videos in one mobile-friendly hub.">
+<title>Yaseeni Video Hub — Shorts & Full Videos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="Movies Hub home"><span class="brand-mark">M<span>+</span></span><span>MOVIES<span class="brand-muted">HUB</span></span></a>
-    <nav class="desktop-nav" id="mainNav" aria-label="Main navigation">
-      <a class="active" href="#home">Home</a><a href="#trending">Movies</a><a href="#browse">Languages</a><a href="#watch">Where to Watch</a>
-    </nav>
-    <div class="top-actions"><button class="icon-button" id="searchToggle" aria-label="Focus search">⌕</button><a class="profile-dot" href="#about" aria-label="About Movies Hub">MH</a><button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span><span></span></button></div>
-  </header>
-  <main id="home">
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> YOUR NEXT MOVIE NIGHT STARTS HERE</div>
-        <h1>Stories worth<br><span>staying up for.</span></h1>
-        <p>Explore standout films, discover new favourites, and find a place to watch them.</p>
-        <div class="hero-buttons"><a class="button button-primary" href="#trending">Explore movies <span>↗</span></a><a class="button button-ghost" href="#watch">Where to watch</a></div>
-        <div class="hero-note"><span class="mini-avatars"><i>✦</i><i>▶</i><i>★</i></span><span>A universe of cinema, in one hub.</span></div>
-      </div>
-      <div class="hero-art" aria-label="Featured cinema artwork">
-        <div class="poster-glow"></div><div class="hero-poster poster-a"><span class="poster-kicker">THE ART OF CINEMA</span><span class="poster-title">DREAM<br>BEYOND</span><span class="poster-foot">EVERY STORY BEGINS SOMEWHERE</span></div>
-        <div class="floating-card floating-rating"><span class="rating-star">★</span><div><strong>Curated for you</strong><small>Find your next favourite</small></div></div>
-        <div class="floating-card floating-play"><span>▶</span><div><strong>Discover trailers</strong><small>See before you stream</small></div></div>
-        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-      </div>
-    </section>
-    <section class="search-panel" id="searchPanel">
-      <div class="search-icon">⌕</div><input id="searchInput" type="search" placeholder="Search movies, genres, or languages..." autocomplete="off" aria-label="Search movie catalogue"><kbd>SEARCH</kbd>
-    </section>
-    <section class="section-block" id="trending">
-      <div class="section-heading"><div><div class="section-overline">PICKED FOR YOUR WATCHLIST</div><h2>Explore the collection <span class="heading-spark">✳</span></h2></div><a class="text-link" href="#browse">Browse all <span>→</span></a></div>
-      <div class="filter-row" id="filterRow"><button class="filter-chip selected" data-filter="All">All titles</button><button class="filter-chip" data-filter="Action">Action</button><button class="filter-chip" data-filter="Drama">Drama</button><button class="filter-chip" data-filter="Sci-Fi">Sci-Fi</button><button class="filter-chip" data-filter="Animation">Animation</button><button class="filter-chip" data-filter="Thriller">Thriller</button></div>
-      <div class="movie-grid" id="movieGrid" aria-live="polite"><div class="loading-state">Loading your movie collection…</div></div>
-      <p class="empty-state" id="emptyState" hidden>No titles match your search. Try another title or filter.</p>
-    </section>
-    <section class="language-section" id="browse">
-      <div><div class="section-overline">YOUR LANGUAGE. YOUR CINEMA.</div><h2>Browse by language</h2><p>From regional favourites to international stories.</p></div>
-      <div class="language-grid">
-        <button class="language-card" data-language="Tamil"><span class="language-symbol">த</span><span><strong>Tamil</strong><small>Regional cinema</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Malayalam"><span class="language-symbol">മ</span><span><strong>Malayalam</strong><small>Stories with soul</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Telugu"><span class="language-symbol">తె</span><span><strong>Telugu</strong><small>Big-screen energy</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Hindi"><span class="language-symbol">हि</span><span><strong>Hindi</strong><small>Every kind of story</small></span><b>↗</b></button>
-        <button class="language-card" data-language="English"><span class="language-symbol">EN</span><span><strong>English</strong><small>Worldwide favourites</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Urdu"><span class="language-symbol">اردو</span><span><strong>Urdu</strong><small>Stories across borders</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Kannada"><span class="language-symbol">ಕ</span><span><strong>Kannada</strong><small>Kannada cinema</small></span><b>↗</b></button>
-        <button class="language-card" data-language="Arabic"><span class="language-symbol">ع</span><span><strong>Arabic</strong><small>Arabic-language films</small></span><b>↗</b></button>
-      </div>
-    </section>
-    <section class="watch-section" id="watch"><div class="watch-icon">▶</div><div><div class="section-overline">READY FOR MOVIE NIGHT?</div><h2>Find where to watch.</h2><p>Use official streaming services or licensed digital stores to watch titles legally in your region.</p></div><a class="button button-primary" href="https://www.justwatch.com/" target="_blank" rel="noopener noreferrer">Find streaming options ↗</a></section>
-  </main>
-  <nav class="mobile-bottom-nav" aria-label="Quick navigation"><a class="bottom-active" href="#home"><span>⌂</span><small>Home</small></a><a href="#trending"><span>▤</span><small>Movies</small></a><a href="#browse"><span>文</span><small>Languages</small></a><a href="#watch"><span>▶</span><small>Watch</small></a></nav>
-  <footer id="about"><a class="brand footer-brand" href="#home"><span class="brand-mark">M<span>+</span></span><span>MOVIES<span class="brand-muted">HUB</span></span></a><p>Discover films. Respect creators. Watch officially.</p><div class="footer-links"><a href="#home">Home</a><a href="#browse">Languages</a><a href="#watch">Where to watch</a></div><small>© <span id="year"></span> Movies Hub. Movie metadata and imagery belong to their respective owners.</small></footer>
-  <script src="assets/js/app.js"></script>
-</body>
-</html>
+<body class="video-hub">
+<header class="topbar video-topbar">
+<a class="brand" href="#home" aria-label="Yaseeni Video Hub home"><span class="brand-mark">▶</span><span>YASEENI<span class="brand-muted"> VIDEO</span></span></a>
+<nav class="desktop-nav" id="mainNav" aria-label="Main navigation"><a class="active" href="#home">Home</a><a href="#shorts">Shorts</a><a href="#full-videos">Full Videos</a><a href="#categories">Categories</a></nav>
+<div class="top-actions"><button class="icon-button" id="searchToggle" aria-label="Focus search">⌕</button><button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span><span></span></button></div>
+</header>
+<main id="home">
+<section class="video-hero"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> YOUR VIDEO UNIVERSE</div><h1>Scroll less.<br><span>Watch what you love.</span></h1><p>Quick Shorts, movie trailers, highlights and full-length videos — all in one place.</p><div class="hero-buttons"><a class="button button-primary" href="#shorts">▶ Explore Shorts</a><a class="button button-ghost" href="#full-videos">Browse full videos ↓</a></div><div class="hero-stats"><span><b>01</b> Shorts</span><span><b>02</b> Full videos</span><span><b>03</b> Your categories</span></div></div>
+<div class="hero-video-art"><div class="hero-screen"><div class="screen-orb"></div><div class="screen-play">▶</div><div class="screen-caption">PRESS PLAY<br><strong>FIND YOUR NEXT FAVOURITE</strong></div></div><div class="hero-float float-one">🔥 Trending now</div><div class="hero-float float-two">▶ Watch anywhere</div></div></section>
+<section class="video-search" id="searchPanel"><span>⌕</span><input id="searchInput" type="search" placeholder="Search videos, topics, languages..." aria-label="Search videos"><button id="clearSearch" type="button">CLEAR</button></section>
+<div class="video-tabs" role="tablist" aria-label="Video type"><button class="video-tab active" data-kind="all" role="tab">✨ For You</button><button class="video-tab" data-kind="short" role="tab">▣ Shorts</button><button class="video-tab" data-kind="full" role="tab">▶ Full Videos</button></div>
+<section class="video-section" id="shorts"><div class="video-section-head"><div><div class="section-overline">FAST, FUN, REPLAYABLE</div><h2>Shorts <span class="title-pill">UNDER 60 SEC*</span></h2><p>Quick clips, trailers, highlights and bite-size stories.</p></div><button class="see-all" data-show-kind="short">See all ↗</button></div><div class="shorts-rail" id="shortsGrid"></div></section>
+<section class="video-section full-section" id="full-videos"><div class="video-section-head"><div><div class="section-overline">SIT BACK AND ENJOY</div><h2>Full videos</h2><p>Long-form videos, full films and documentaries from authorized sources.</p></div><button class="see-all" data-show-kind="full">See all ↗</button></div><div class="video-grid" id="fullGrid"></div></section>
+<section class="category-section" id="categories"><div class="section-overline">YOUR INTERESTS, YOUR FEED</div><h2>Explore categories</h2><div class="category-grid"><button data-category="Movies"><span>🎬</span><b>Movies & trailers</b><small>Teasers and previews</small></button><button data-category="Education"><span>📚</span><b>Education</b><small>Learn something new</small></button><button data-category="Islamic"><span>🌙</span><b>Islamic</b><small>Talks and reminders</small></button><button data-category="Music"><span>🎵</span><b>Music</b><small>Music and performances</small></button><button data-category="Comedy"><span>😂</span><b>Comedy</b><small>Lighten your day</small></button><button data-category="Documentary"><span>🌍</span><b>Documentary</b><small>Stories from the world</small></button></div></section>
+<section class="creator-note"><div class="creator-icon">＋</div><div><div class="section-overline">BUILD YOUR OWN COLLECTION</div><h2>Want your videos here?</h2><p>Add your own video records in <code>assets/js/app.js</code> using a YouTube video ID or a direct video URL you own or are authorized to publish.</p></div><a class="button button-primary" href="https://github.com/yaseeninoor/Movies-HUB" target="_blank" rel="noopener">Open GitHub ↗</a></section>
+</main>
+<nav class="mobile-bottom-nav" aria-label="Quick navigation"><a class="bottom-active" href="#home"><span>⌂</span><small>Home</small></a><a href="#shorts"><span>▣</span><small>Shorts</small></a><a href="#full-videos"><span>▶</span><small>Full videos</small></a><a href="#categories"><span>☷</span><small>Explore</small></a></nav>
+<footer id="about"><a class="brand footer-brand" href="#home"><span class="brand-mark">▶</span><span>YASEENI<span class="brand-muted"> VIDEO</span></span></a><p>Short clips, big stories. Watch responsibly.</p><div class="footer-links"><a href="#shorts">Shorts</a><a href="#full-videos">Full videos</a><a href="#categories">Categories</a></div><small>© <span id="year"></span> Yaseeni Video Hub. Only publish videos you own or are authorized to share. *Short duration depends on the source.</small></footer>
+<script src="assets/js/app.js"></script>
+</body></html>
