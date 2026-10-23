@@ -224,3 +224,27 @@ body.player-open{overflow:hidden}
 .loop-theme .video-player-modal .player-dialog{background:#101725;border-color:#263852}.loop-theme .player-close{background:#101725;border-color:#1688ff;color:white}
 .loop-theme .player-caption .section-overline{color:#35d9ff}.loop-theme .mobile-bottom-nav{background:#0c1220f5;border-color:#263852}
 .loop-theme .mobile-bottom-nav a.bottom-active,.loop-theme .mobile-bottom-nav a:hover{color:#35d9ff;background:#11223a}
+
+
+/* LOOP light sand theme refresh */
+.loop-theme{background:#f7f4ec;color:#202b3a;--bg:#f7f4ec;--panel:#fffdf8;--panel2:#eee9df;--text:#202b3a;--muted:#6f7884;--blue:#1677e8;--cyan:#20a9cf;--line:#e2ddd3}
+.loop-theme .video-topbar{background:rgba(255,253,248,.96);border-bottom:1px solid #e7e1d6;box-shadow:0 5px 20px #27364a0a}
+.loop-theme .brand-mark{background:linear-gradient(135deg,#20a9cf,#1677e8);color:#fff;box-shadow:0 5px 15px #1677e822}
+.loop-theme .brand-muted{color:#1677e8}
+.loop-theme .desktop-nav a{color:#5e6875}.loop-theme .desktop-nav a.active,.loop-theme .desktop-nav a:hover{color:#1677e8;box-shadow:inset 0 -2px #1677e8}
+.loop-theme .icon-button,.loop-theme .menu-toggle{border-color:#e0d9cd;background:#fffdf8;color:#26364b}
+.loop-theme .menu-toggle span{background:#1677e8}
+.loop-welcome h1{color:#202b3a}.loop-welcome p{color:#6f7884}.loop-kicker{color:#1677e8}.loop-kicker span{background:#20a9cf;box-shadow:0 0 10px #20a9cf55}
+.loop-live-card{border-color:#e5ded2;background:radial-gradient(circle at 90% 0,#20a9cf20,transparent 55%),#fffdf8;box-shadow:0 12px 35px #24364a0d}
+.loop-live-card>span{background:#1677e8;color:#fff}.loop-live-card b{color:#26364b}.loop-live-card small{color:#7b8490}
+.loop-theme .video-search{background:#fffdf8;border-color:#e0d9cd;box-shadow:0 5px 20px #27364a08}.loop-theme .video-search>span{color:#1677e8}.loop-theme .video-search input{color:#202b3a}.loop-theme .video-search input::placeholder{color:#9299a1}
+.loop-theme .video-tabs{background:#f7f4eced;border-color:#e4ded3}.loop-theme .video-tab{background:#fffdf8;border-color:#e2ddd3;color:#697482}.loop-theme .video-tab.active,.loop-theme .video-tab:hover{background:#1677e8;border-color:#1677e8;color:#fff}
+.loop-theme .video-section-head h2,.loop-theme .category-section h2{color:#202b3a}.loop-theme .section-overline{color:#1677e8}.loop-theme .title-pill{background:#20a9cf;color:#fff}.loop-theme .see-all{background:#fffdf8;border-color:#e2ddd3;color:#1677e8}
+.loop-theme .short-card,.loop-theme .full-card{background:#fffdf8;border-color:#e6e0d6;box-shadow:0 7px 24px #26364b0b}.loop-theme .short-thumb,.loop-theme .full-thumb{background:radial-gradient(circle at 75% 18%,var(--video-accent,#1677e8),transparent 28%),radial-gradient(circle at 25% 75%,#20a9cf35,transparent 45%),linear-gradient(145deg,#eee9df,#e2ddd3)}
+.loop-theme .thumb-icon{background:#fffdf8dd;color:#1677e8;border-color:#ffffff}.loop-theme .thumb-play{background:#ffffffdc;color:#1677e8;border-color:#fff}.loop-theme .short-card:hover .thumb-play,.loop-theme .full-card:hover .thumb-play{background:#1677e8;color:#fff}.loop-theme .thumb-label{color:#fff;text-shadow:0 1px 5px #0008}.loop-theme .thumb-duration{background:#202b3add;color:#fff}
+.loop-theme .video-category{color:#1677e8}.loop-theme .video-card-info h3{color:#202b3a}.loop-theme .video-card-info p{color:#737d89}.loop-theme .watch-now{background:#f0ede6;border-color:#e1dbd0;color:#27364b}.loop-theme .watch-now:hover{background:#1677e8;border-color:#1677e8;color:#fff}
+.loop-theme .category-section{border-top-color:#e2ddd3}.loop-theme .category-grid button{background:#fffdf8;border-color:#e2ddd3;color:#26364b;box-shadow:0 4px 16px #26364a08}.loop-theme .category-grid button>span{background:#eaf3fb;color:#1677e8}.loop-theme .category-grid button:hover,.loop-theme .category-grid button.category-selected{border-color:#1677e8;background:#edf5ff}
+.loop-theme .video-player-modal .player-dialog{background:#fffdf8;border-color:#e2ddd3;color:#202b3a}.loop-theme .player-close{background:#fffdf8;border-color:#1677e8;color:#1677e8}.loop-theme .player-caption .section-overline{color:#1677e8}.loop-theme .video-empty{color:#697482}.loop-theme footer{border-top-color:#e2ddd3;color:#697482}
+.loop-theme .mobile-bottom-nav{background:#fffdf8f5;border-color:#e2ddd3;box-shadow:0 -5px 25px #26364a0c}.loop-theme .mobile-bottom-nav a{color:#77818d}.loop-theme .mobile-bottom-nav a.bottom-active,.loop-theme .mobile-bottom-nav a:hover{color:#1677e8;background:#edf5ff}
+.loop-theme .video-tab:focus-visible,.loop-theme button:focus-visible,.loop-theme a:focus-visible{outline:2px solid #1677e8;outline-offset:2px}
+@media(prefers-color-scheme:dark){.loop-theme{color-scheme:light}}
