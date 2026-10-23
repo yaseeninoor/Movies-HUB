@@ -35,9 +35,10 @@ function render(){
  const filtered=videos.filter(v=>(activeKind==="all"||v.kind===activeKind)&&(!activeCategory||v.category.toLowerCase()===activeCategory.toLowerCase())&&(!query||[v.title,v.category,v.language,v.description].join(" ").toLowerCase().includes(query)));
  shortGrid.innerHTML=filtered.filter(v=>v.kind==="short").map(v=>card(v,true)).join("");
  fullGrid.innerHTML=filtered.filter(v=>v.kind==="full").map(v=>card(v,false)).join("");
- document.querySelectorAll(".video-section").forEach(section=>section.classList.toggle("section-dimmed",activeKind!=="all"&&!section.id.includes(activeKind==="short"?"shorts":"full-videos")));
+ document.querySelectorAll(".video-section").forEach(section=>{section.classList.remove("section-dimmed");section.hidden=(activeKind==="short"&&section.id==="full-videos")||(activeKind==="full"&&section.id==="shorts");});
  let no=document.getElementById("videoEmpty");if(!no){no=document.createElement("p");no.id="videoEmpty";no.className="video-empty";no.textContent="No videos match your search. Try another keyword or category.";document.querySelector(".video-tabs").after(no)}
  no.hidden=filtered.length>0;
+ document.getElementById("categories").hidden=!!activeCategory||!!query||activeKind!=="all";
 }
 document.querySelectorAll("[data-kind]").forEach(b=>b.addEventListener("click",()=>{activeKind=b.dataset.kind;document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x===b));render();document.getElementById(activeKind==="short"?"shorts":activeKind==="full"?"full-videos":"home").scrollIntoView({behavior:"smooth",block:"start"})}));
 document.addEventListener("click",e=>{
@@ -48,10 +49,12 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePlayer()});
 searchInput.addEventListener("input",()=>{query=searchInput.value.trim().toLowerCase();render()});
-document.getElementById("clearSearch").addEventListener("click",()=>{searchInput.value="";query="";activeCategory="";document.querySelectorAll("[data-category]").forEach(x=>x.classList.remove("category-selected"));render();searchInput.focus()});
+document.getElementById("clearSearch").addEventListener("click",()=>{searchInput.value="";query="";activeCategory="";activeKind="all";document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x.dataset.kind==="all"));document.querySelectorAll("[data-category]").forEach(x=>x.classList.remove("category-selected"));render();searchInput.focus()});
 document.getElementById("searchToggle").addEventListener("click",()=>{searchInput.focus();document.getElementById("searchPanel").scrollIntoView({behavior:"smooth",block:"center"})});
 const menuToggle=document.getElementById("menuToggle"),mainNav=document.getElementById("mainNav");
 if(menuToggle&&mainNav){menuToggle.addEventListener("click",()=>{const open=mainNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu")});mainNav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mainNav.classList.remove("menu-open");menuToggle.setAttribute("aria-expanded","false")}))}
 document.querySelectorAll(".mobile-bottom-nav a").forEach(a=>a.addEventListener("click",()=>document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===a))));
 document.getElementById("year").textContent=new Date().getFullYear();
+// If an embedded source blocks playback, offer its official YouTube page.
+document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IFRAME"){const frame=e.target;const fallback=document.createElement("a");fallback.className="button button-primary";fallback.href=frame.src.replace("https://www.youtube-nocookie.com/embed/","https://www.youtube.com/watch?v=").split("?")[0];fallback.target="_blank";fallback.rel="noopener noreferrer";fallback.textContent="Open video on YouTube ↗";frame.parentNode.replaceChild(fallback,frame)}},true);
 render();
