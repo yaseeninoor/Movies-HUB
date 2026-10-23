@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Yaseenis Hub - Islamic Digital Library",
+  "short_name": "Yaseenis Hub",
+  "description": "தமிழ் இஸ்லாமிய கட்டுரைகள், PDF நூல்கள், குர்ஆன், ஹதீஸ் மற்றும் பல வளங்கள்.",
+  "lang": "ta",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f8fc",
+  "theme_color": "#071a36",
+  "categories": ["education", "books", "lifestyle"],
+  "icons": [
+    {"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
