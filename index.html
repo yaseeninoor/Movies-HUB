@@ -15,10 +15,10 @@
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
   <header class="topbar">
     <a class="brand" href="#" aria-label="Movies Hub home"><span class="brand-mark">M<span>+</span></span><span>MOVIES<span class="brand-muted">HUB</span></span></a>
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a class="active" href="#home">Home</a><a href="#trending">Trending</a><a href="#browse">Browse</a><a href="#watch">Where to Watch</a>
+    <nav class="desktop-nav" id="mainNav" aria-label="Main navigation">
+      <a class="active" href="#home">Home</a><a href="#trending">Movies</a><a href="#browse">Languages</a><a href="#watch">Where to Watch</a>
     </nav>
-    <div class="top-actions"><button class="icon-button" id="searchToggle" aria-label="Focus search">⌕</button><a class="profile-dot" href="#about" aria-label="About Movies Hub">MH</a></div>
+    <div class="top-actions"><button class="icon-button" id="searchToggle" aria-label="Focus search">⌕</button><a class="profile-dot" href="#about" aria-label="About Movies Hub">MH</a><button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span><span></span></button></div>
   </header>
   <main id="home">
     <section class="hero">
@@ -54,10 +54,13 @@
         <button class="language-card" data-language="Hindi"><span class="language-symbol">हि</span><span><strong>Hindi</strong><small>Every kind of story</small></span><b>↗</b></button>
         <button class="language-card" data-language="English"><span class="language-symbol">EN</span><span><strong>English</strong><small>Worldwide favourites</small></span><b>↗</b></button>
         <button class="language-card" data-language="Urdu"><span class="language-symbol">اردو</span><span><strong>Urdu</strong><small>Stories across borders</small></span><b>↗</b></button>
+        <button class="language-card" data-language="Kannada"><span class="language-symbol">ಕ</span><span><strong>Kannada</strong><small>Kannada cinema</small></span><b>↗</b></button>
+        <button class="language-card" data-language="Arabic"><span class="language-symbol">ع</span><span><strong>Arabic</strong><small>Arabic-language films</small></span><b>↗</b></button>
       </div>
     </section>
     <section class="watch-section" id="watch"><div class="watch-icon">▶</div><div><div class="section-overline">READY FOR MOVIE NIGHT?</div><h2>Find where to watch.</h2><p>Use official streaming services or licensed digital stores to watch titles legally in your region.</p></div><a class="button button-primary" href="https://www.justwatch.com/" target="_blank" rel="noopener noreferrer">Find streaming options ↗</a></section>
   </main>
+  <nav class="mobile-bottom-nav" aria-label="Quick navigation"><a class="bottom-active" href="#home"><span>⌂</span><small>Home</small></a><a href="#trending"><span>▤</span><small>Movies</small></a><a href="#browse"><span>文</span><small>Languages</small></a><a href="#watch"><span>▶</span><small>Watch</small></a></nav>
   <footer id="about"><a class="brand footer-brand" href="#home"><span class="brand-mark">M<span>+</span></span><span>MOVIES<span class="brand-muted">HUB</span></span></a><p>Discover films. Respect creators. Watch officially.</p><div class="footer-links"><a href="#home">Home</a><a href="#browse">Languages</a><a href="#watch">Where to watch</a></div><small>© <span id="year"></span> Movies Hub. Movie metadata and imagery belong to their respective owners.</small></footer>
   <script src="assets/js/app.js"></script>
 </body>
