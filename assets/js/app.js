@@ -1,50 +1,57 @@
-const fallbackMovies = [
- {id:1,title:"Vikram",year:2022,language:"Tamil",genre:"Action",rating:"8.3",symbol:"வ",accent:"#ed3b35",overview:"A special investigator uncovers a dangerous network in this high-energy action thriller."},
- {id:2,title:"Jai Bhim",year:2021,language:"Tamil",genre:"Drama",rating:"8.7",symbol:"நீதி",accent:"#f3b82e",overview:"A lawyer fights for justice for a marginalized community in a powerful courtroom drama."},
- {id:3,title:"Interstellar",year:2014,language:"English",genre:"Sci-Fi",rating:"8.7",symbol:"✦",accent:"#d94b31",overview:"Explorers travel beyond this galaxy to secure humanity's future."},
- {id:4,title:"Inception",year:2010,language:"English",genre:"Sci-Fi",rating:"8.8",symbol:"∞",accent:"#f2b62d",overview:"A skilled thief enters dreams to steal secrets—and attempts an impossible task."},
- {id:5,title:"Premam",year:2015,language:"Malayalam",genre:"Drama",rating:"8.3",symbol:"പ്രേമം",accent:"#e45b68",overview:"A young man's life and loves unfold across different stages of growing up."},
- {id:6,title:"RRR",year:2022,language:"Telugu",genre:"Action",rating:"7.8",symbol:"RRR",accent:"#f4a52a",overview:"Two legendary revolutionaries cross paths in a fictional tale of friendship and courage."},
- {id:7,title:"3 Idiots",year:2009,language:"Hindi",genre:"Comedy",rating:"8.4",symbol:"तीन",accent:"#dc4538",overview:"Three engineering students challenge expectations and rediscover what learning means."},
- {id:8,title:"Spider-Man: Into the Spider-Verse",year:2018,language:"English",genre:"Animation",rating:"8.4",symbol:"SPIDER",accent:"#e13c38",overview:"A Brooklyn teenager meets other Spider-heroes from alternate dimensions."},
- {id:9,title:"Drishyam",year:2013,language:"Malayalam",genre:"Thriller",rating:"8.3",symbol:"ദൃശ്യം",accent:"#e9b52e",overview:"A family man goes to extraordinary lengths to protect his family."},
- {id:10,title:"The Dark Knight",year:2008,language:"English",genre:"Action",rating:"9.0",symbol:"KNIGHT",accent:"#e44c34",overview:"Batman faces a criminal mastermind who plunges Gotham into chaos."},
- {id:11,title:"Super Deluxe",year:2019,language:"Tamil",genre:"Drama",rating:"8.2",symbol:"சூப்பர்",accent:"#e8a72b",overview:"Four unusual stories collide over one event in an inventive ensemble drama."},
- {id:12,title:"Coco",year:2017,language:"English",genre:"Animation",rating:"8.4",symbol:"♪",accent:"#e84a34",overview:"A music-loving boy journeys into the Land of the Dead to learn about his family."},
- {id:13,title:"Kantara",year:2022,language:"Kannada",genre:"Action",rating:"8.2",symbol:"ಕಾಂತಾರ",accent:"#f0b32d",overview:"A Kambala champion becomes entangled in a conflict between people and nature."},
- {id:14,title:"Theeb",year:2014,language:"Arabic",genre:"Drama",rating:"7.2",symbol:"ذيب",accent:"#e45a37",overview:"A young Bedouin boy navigates the desert during the First World War."},
- {id:15,title:"Joyland",year:2022,language:"Urdu",genre:"Drama",rating:"7.7",symbol:"JOYLAND",accent:"#e6ad2e",overview:"A young man joins an erotic dance theatre and confronts family expectations."}
+const videos=[
+{id:1,title:"A little moment of nature",kind:"short",category:"Nature",language:"Universal",duration:"00:06",description:"A sample short clip demonstrating video playback.",type:"mp4",src:"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",accent:"#e84935",badge:"SAMPLE CLIP"},
+{id:2,title:"Tamil movie trailers",kind:"short",category:"Movies",language:"Tamil",duration:"Shorts",description:"Discover official Tamil movie teasers and trailers.",type:"search",query:"Tamil movie official teaser trailer"},
+{id:3,title:"Islamic reminders",kind:"short",category:"Islamic",language:"Tamil / Arabic",duration:"Shorts",description:"Find short Islamic reminders from publishers and channels.",type:"search",query:"Tamil Islamic short reminder official"},
+{id:4,title:"Funny moments",kind:"short",category:"Comedy",language:"Universal",duration:"Shorts",description:"Search for funny short videos from creators.",type:"search",query:"funny short videos official creators"},
+{id:5,title:"Learn something new",kind:"short",category:"Education",language:"Universal",duration:"Shorts",description:"Quick educational videos and explainers.",type:"search",query:"educational shorts official"},
+{id:6,title:"Music moments",kind:"short",category:"Music",language:"Universal",duration:"Shorts",description:"Discover official music clips and performances.",type:"search",query:"official music shorts performances"},
+{id:7,title:"Big Buck Bunny",kind:"full",category:"Animation",language:"English",duration:"~10 min",description:"A freely available animated short film from the Blender Open Movie project. Sample full-video player.",type:"youtube",videoId:"aqz-KE-bpKQ",accent:"#f0b42d",badge:"OPEN MOVIE"},
+{id:8,title:"Tamil full-length films",kind:"full",category:"Movies",language:"Tamil",duration:"Full videos",description:"Search for films published by authorized channels and rights holders.",type:"search",query:"Tamil full movie official authorized channel"},
+{id:9,title:"Documentaries",kind:"full",category:"Documentary",language:"English",duration:"Full videos",description:"Discover documentaries from official and public-domain sources.",type:"search",query:"full documentary official channel public domain"},
+{id:10,title:"Educational lectures",kind:"full",category:"Education",language:"Universal",duration:"Full videos",description:"Long-form lessons and educational videos.",type:"search",query:"full educational lecture official channel"},
+{id:11,title:"Islamic lectures",kind:"full",category:"Islamic",language:"Tamil / Arabic",duration:"Full videos",description:"Find complete talks and lectures published by their owners.",type:"search",query:"Tamil Islamic full lecture official channel"},
+{id:12,title:"Live music & performances",kind:"full",category:"Music",language:"Universal",duration:"Full videos",description:"Concerts and performances from authorized publishers.",type:"search",query:"full live music performance official channel"}
 ];
-const grid=document.getElementById("movieGrid"), searchInput=document.getElementById("searchInput"), empty=document.getElementById("emptyState");
-let movies=fallbackMovies, activeGenre="All", activeLanguage="", query="", saved=new Set(JSON.parse(localStorage.getItem("moviesHubSaved")||"[]"));
+const shortGrid=document.getElementById("shortsGrid"),fullGrid=document.getElementById("fullGrid"),searchInput=document.getElementById("searchInput");
+let activeKind="all",activeCategory="",query="";
 const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const queryUrl=(base,title)=>base+encodeURIComponent(title);
-const trailerUrl=m=>m.trailer||queryUrl("https://www.youtube.com/results?search_query=",m.title+" official trailer");
-const watchUrl=m=>"https://www.justwatch.com/us/search?q="+encodeURIComponent(m.title);
-const buyUrl=m=>"https://www.google.com/search?q="+encodeURIComponent(m.title+" "+m.year+" official digital purchase download");
-function openDetails(id){
- const m=movies.find(x=>String(x.id)===String(id)); if(!m)return;
- let modal=document.getElementById("movieModal");
- if(!modal){modal=document.createElement("div");modal.id="movieModal";modal.className="movie-modal";modal.setAttribute("role","dialog");modal.setAttribute("aria-modal","true");modal.setAttribute("aria-label","Movie details");document.body.appendChild(modal);}
- modal.innerHTML='<div class="modal-backdrop" data-close-modal></div><section class="modal-card"><button class="modal-close" data-close-modal aria-label="Close details">×</button><div class="modal-poster" style="--poster-accent:'+safe(m.accent||"#e63d32")+'"><span>'+safe(m.symbol||"✦")+'</span><strong>'+safe(m.title)+'</strong></div><div class="modal-info"><div class="modal-kicker">MOVIES HUB • '+safe(m.language)+'</div><h2>'+safe(m.title)+'</h2><div class="modal-meta">★ '+safe(m.rating||"—")+' &nbsp; · &nbsp; '+safe(m.year)+' &nbsp; · &nbsp; '+safe(m.genre||"Movie")+'</div><p>'+safe(m.overview||("Discover "+m.title+", a "+m.language+" "+(m.genre||"film")+" released in "+m.year+"."))+'</p><a class="modal-action modal-primary" href="'+safe(watchUrl(m))+'" target="_blank" rel="noopener noreferrer">▶ Find legal streaming options</a><a class="modal-action" href="'+safe(trailerUrl(m))+'" target="_blank" rel="noopener noreferrer">▷ Watch trailer</a><a class="modal-action" href="'+safe(buyUrl(m))+'" target="_blank" rel="noopener noreferrer">↓ Find official purchase / download</a><small>Availability varies by country. Download only from authorized services.</small></div></section>';
- document.body.classList.add("modal-open");modal.querySelector(".modal-close").focus();
+function openVideo(id){
+ const v=videos.find(x=>x.id===Number(id));if(!v)return;
+ let modal=document.getElementById("videoPlayerModal");
+ if(!modal){modal=document.createElement("div");modal.id="videoPlayerModal";modal.className="video-player-modal";modal.setAttribute("role","dialog");modal.setAttribute("aria-modal","true");modal.setAttribute("aria-label","Video player");document.body.appendChild(modal);}
+ let player="";
+ if(v.type==="youtube")player='<iframe src="https://www.youtube-nocookie.com/embed/'+safe(v.videoId)+'?autoplay=1&rel=0" title="'+safe(v.title)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+ else if(v.type==="mp4")player='<video controls autoplay playsinline src="'+safe(v.src)+'">Your browser does not support video playback.</video>';
+ else player='<div class="external-video"><span>▶</span><h3>'+safe(v.title)+'</h3><p>Open the source platform to find videos from official channels and authorized publishers.</p><a class="button button-primary" href="https://www.youtube.com/results?search_query='+encodeURIComponent(v.query)+'" target="_blank" rel="noopener noreferrer">Find videos on YouTube ↗</a></div>';
+ modal.innerHTML='<div class="player-backdrop" data-close-player></div><section class="player-dialog"><button class="player-close" data-close-player aria-label="Close player">×</button><div class="player-frame">'+player+'</div><div class="player-caption"><div class="section-overline">'+safe(v.category)+' · '+safe(v.language)+'</div><h2>'+safe(v.title)+'</h2><p>'+safe(v.description)+'</p></div></section>';
+ document.body.classList.add("player-open");modal.querySelector(".player-close").focus();
 }
-function closeDetails(){const modal=document.getElementById("movieModal");if(modal){modal.remove();document.body.classList.remove("modal-open");}}
+function closePlayer(){const m=document.getElementById("videoPlayerModal");if(m){m.remove();document.body.classList.remove("player-open")}}
+function card(v,short){
+ const icon=short?"▣":"▶";
+ return '<article class="'+(short?"short-card":"full-card")+'"><button class="'+(short?"short-thumb":"full-thumb")+'" data-play="'+v.id+'" style="--video-accent:'+safe(v.accent||"#ed3b35")+'" aria-label="Play '+safe(v.title)+'"><span class="thumb-icon">'+icon+'</span><span class="thumb-label">'+safe(v.badge||v.category.toUpperCase())+'</span><span class="thumb-play">▶</span><span class="thumb-duration">'+safe(v.duration)+'</span></button><div class="video-card-info"><div class="video-category">'+safe(v.category)+' <span>·</span> '+safe(v.language)+'</div><h3>'+safe(v.title)+'</h3><p>'+safe(v.description)+'</p><button class="watch-now" data-play="'+v.id+'">▶ '+(v.type==="search"?"Find videos":"Play video")+' <span>↗</span></button></div></article>';
+}
 function render(){
- const shown=movies.filter(m=>(activeGenre==="All"||m.genre===activeGenre)&&(!activeLanguage||m.language.toLowerCase()===activeLanguage.toLowerCase())&&(!query||[m.title,m.language,m.genre,String(m.year)].join(" ").toLowerCase().includes(query)));
- grid.innerHTML=shown.map((m,i)=>'<article class="movie-card" style="animation-delay:'+Math.min(i*35,250)+'ms"><button class="movie-poster poster-open" data-details="'+safe(m.id)+'" aria-label="View details for '+safe(m.title)+'"><div class="poster-placeholder" style="--poster-accent:'+safe(m.accent||"#ed3b35")+'"><span class="symbol">'+safe(m.symbol||"✦")+'</span><strong>'+safe(m.title)+'</strong><small>'+safe(m.language)+' · '+safe(m.year)+'</small></div><span class="movie-badge">'+safe(m.genre||"Movie").toUpperCase()+'</span></button><button class="save-button '+(saved.has(m.id)?"saved":"")+'" data-save="'+safe(m.id)+'" aria-label="'+(saved.has(m.id)?"Remove from":"Add to")+' watchlist">'+(saved.has(m.id)?"♥":"♡")+'</button><div class="movie-meta"><div class="movie-title-row"><h3 class="movie-title">'+safe(m.title)+'</h3><span class="movie-year">'+safe(m.year)+'</span></div><div class="movie-sub"><span class="movie-rating">★ '+safe(m.rating||"—")+'</span><span>·</span><span>'+safe(m.language)+'</span></div><div class="movie-actions"><button class="small-action" data-details="'+safe(m.id)+'">Details</button><a class="small-action action-hot" href="'+safe(watchUrl(m))+'" target="_blank" rel="noopener noreferrer">Watch ↗</a><a class="small-action" href="'+safe(buyUrl(m))+'" target="_blank" rel="noopener noreferrer" aria-label="Find official download for '+safe(m.title)+'">Download options ↓</a></div></div></article>').join("");
- empty.hidden=shown.length!==0;if(!shown.length)grid.innerHTML="";
+ const filtered=videos.filter(v=>(activeKind==="all"||v.kind===activeKind)&&(!activeCategory||v.category.toLowerCase()===activeCategory.toLowerCase())&&(!query||[v.title,v.category,v.language,v.description].join(" ").toLowerCase().includes(query)));
+ shortGrid.innerHTML=filtered.filter(v=>v.kind==="short").map(v=>card(v,true)).join("");
+ fullGrid.innerHTML=filtered.filter(v=>v.kind==="full").map(v=>card(v,false)).join("");
+ document.querySelectorAll(".video-section").forEach(section=>section.classList.toggle("section-dimmed",activeKind!=="all"&&!section.id.includes(activeKind==="short"?"shorts":"full-videos")));
+ let no=document.getElementById("videoEmpty");if(!no){no=document.createElement("p");no.id="videoEmpty";no.className="video-empty";no.textContent="No videos match your search. Try another keyword or category.";document.querySelector(".video-tabs").after(no)}
+ no.hidden=filtered.length>0;
 }
-document.getElementById("filterRow").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;activeGenre=b.dataset.filter;activeLanguage="";document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("selected",x===b));document.querySelectorAll(".language-card").forEach(x=>x.classList.remove("selected"));render()});
+document.querySelectorAll("[data-kind]").forEach(b=>b.addEventListener("click",()=>{activeKind=b.dataset.kind;document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x===b));render();document.getElementById(activeKind==="short"?"shorts":activeKind==="full"?"full-videos":"home").scrollIntoView({behavior:"smooth",block:"start"})}));
+document.addEventListener("click",e=>{
+ const play=e.target.closest("[data-play]");if(play){openVideo(play.dataset.play);return}
+ if(e.target.closest("[data-close-player]"))closePlayer();
+ const see=e.target.closest("[data-show-kind]");if(see){activeKind=see.dataset.showKind;document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x.dataset.kind===activeKind));render();document.getElementById(activeKind==="short"?"shorts":"full-videos").scrollIntoView({behavior:"smooth"});return}
+ const cat=e.target.closest("[data-category]");if(cat){activeCategory=activeCategory===cat.dataset.category?"":cat.dataset.category;activeKind="all";document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x.dataset.kind==="all"));document.querySelectorAll("[data-category]").forEach(x=>x.classList.toggle("category-selected",x===cat&&!!activeCategory));render();document.querySelector(".video-tabs").scrollIntoView({behavior:"smooth"});}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closePlayer()});
 searchInput.addEventListener("input",()=>{query=searchInput.value.trim().toLowerCase();render()});
+document.getElementById("clearSearch").addEventListener("click",()=>{searchInput.value="";query="";activeCategory="";document.querySelectorAll("[data-category]").forEach(x=>x.classList.remove("category-selected"));render();searchInput.focus()});
 document.getElementById("searchToggle").addEventListener("click",()=>{searchInput.focus();document.getElementById("searchPanel").scrollIntoView({behavior:"smooth",block:"center"})});
-document.querySelectorAll(".language-card").forEach(b=>b.addEventListener("click",()=>{activeLanguage=activeLanguage===b.dataset.language?"":b.dataset.language;activeGenre="All";document.querySelectorAll(".language-card").forEach(x=>x.classList.toggle("selected",x===b&&!!activeLanguage));document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("selected",x.dataset.filter==="All"));document.getElementById("trending").scrollIntoView({behavior:"smooth"});render()}));
-grid.addEventListener("click",e=>{const detail=e.target.closest("[data-details]");if(detail){openDetails(detail.dataset.details);return;}const b=e.target.closest("[data-save]");if(!b)return;const id=Number(b.dataset.save);if(saved.has(id))saved.delete(id);else saved.add(id);localStorage.setItem("moviesHubSaved",JSON.stringify([...saved]));render()});
-document.addEventListener("click",e=>{if(e.target.closest("[data-close-modal]"))closeDetails()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails()});
-fetch("data/movies.json").then(r=>r.ok?r.json():Promise.reject()).then(data=>{if(Array.isArray(data)&&data.length)movies=data.map(m=>({...m,overview:m.overview||""}));render()}).catch(()=>render());
-document.getElementById("year").textContent=new Date().getFullYear();
 const menuToggle=document.getElementById("menuToggle"),mainNav=document.getElementById("mainNav");
-if(menuToggle&&mainNav){menuToggle.addEventListener("click",()=>{const open=mainNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu")});mainNav.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{mainNav.classList.remove("menu-open");menuToggle.setAttribute("aria-expanded","false")}))}
-document.querySelectorAll(".mobile-bottom-nav a").forEach(link=>link.addEventListener("click",()=>document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===link))));
+if(menuToggle&&mainNav){menuToggle.addEventListener("click",()=>{const open=mainNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu")});mainNav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mainNav.classList.remove("menu-open");menuToggle.setAttribute("aria-expanded","false")}))}
+document.querySelectorAll(".mobile-bottom-nav a").forEach(a=>a.addEventListener("click",()=>document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===a))));
+document.getElementById("year").textContent=new Date().getFullYear();
 render();
