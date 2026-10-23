@@ -29,3 +29,20 @@ grid.addEventListener("click",e=>{const b=e.target.closest("[data-save]");if(!b)
 fetch("data/movies.json").then(r=>r.ok?r.json():Promise.reject()).then(data=>{if(Array.isArray(data)&&data.length)movies=data;render()}).catch(()=>render());
 document.getElementById("year").textContent=new Date().getFullYear();
 render();
+/* Accessible compact mobile menu */
+const menuToggle=document.getElementById("menuToggle");
+const mainNav=document.getElementById("mainNav");
+if(menuToggle&&mainNav){
+ menuToggle.addEventListener("click",()=>{
+  const open=mainNav.classList.toggle("menu-open");
+  menuToggle.setAttribute("aria-expanded",String(open));
+  menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu");
+ });
+ mainNav.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{
+  mainNav.classList.remove("menu-open");
+  menuToggle.setAttribute("aria-expanded","false");
+ }));
+}
+document.querySelectorAll(".mobile-bottom-nav a").forEach(link=>link.addEventListener("click",()=>{
+ document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===link));
+}));
