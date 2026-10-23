@@ -1,4 +1,4 @@
-const videos=[
+const defaultVideos=[
 {id:1,title:"A little moment of nature",kind:"short",category:"Nature",language:"Universal",duration:"00:06",description:"A sample short clip demonstrating video playback.",type:"mp4",src:"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",accent:"#e84935",badge:"SAMPLE CLIP"},
 {id:2,title:"Tamil movie trailers",kind:"short",category:"Movies",language:"Tamil",duration:"Shorts",description:"Discover official Tamil movie teasers and trailers.",type:"search",query:"Tamil movie official teaser trailer"},
 {id:3,title:"Islamic reminders",kind:"short",category:"Islamic",language:"Tamil / Arabic",duration:"Shorts",description:"Find short Islamic reminders from publishers and channels.",type:"search",query:"Tamil Islamic short reminder official"},
@@ -12,6 +12,8 @@ const videos=[
 {id:11,title:"Islamic lectures",kind:"full",category:"Islamic",language:"Tamil / Arabic",duration:"Full videos",description:"Find complete talks and lectures published by their owners.",type:"search",query:"Tamil Islamic full lecture official channel"},
 {id:12,title:"Live music & performances",kind:"full",category:"Music",language:"Universal",duration:"Full videos",description:"Concerts and performances from authorized publishers.",type:"search",query:"full live music performance official channel"}
 ];
+const savedCustomVideos=(()=>{try{return JSON.parse(localStorage.getItem("loopCustomVideos")||"[]")}catch{return []}})();
+const videos=[...defaultVideos,...savedCustomVideos];
 const shortGrid=document.getElementById("shortsGrid"),fullGrid=document.getElementById("fullGrid"),searchInput=document.getElementById("searchInput");
 let activeKind="all",activeCategory="",query="";
 const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -20,7 +22,8 @@ function openVideo(id){
  let modal=document.getElementById("videoPlayerModal");
  if(!modal){modal=document.createElement("div");modal.id="videoPlayerModal";modal.className="video-player-modal";modal.setAttribute("role","dialog");modal.setAttribute("aria-modal","true");modal.setAttribute("aria-label","Video player");document.body.appendChild(modal);}
  let player="";
- if(v.type==="youtube")player='<iframe src="https://www.youtube-nocookie.com/embed/'+safe(v.videoId)+'?autoplay=1&rel=0" title="'+safe(v.title)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+ if(v.type==="iframe")player='<iframe src="'+safe(v.src)+'" title="'+safe(v.title)+'" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+ else if(v.type==="youtube")player='<iframe src="https://www.youtube-nocookie.com/embed/'+safe(v.videoId)+'?autoplay=1&rel=0" title="'+safe(v.title)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
  else if(v.type==="mp4")player='<video controls autoplay playsinline src="'+safe(v.src)+'">Your browser does not support video playback.</video>';
  else player='<div class="external-video"><span>▶</span><h3>'+safe(v.title)+'</h3><p>Open the source platform to find videos from official channels and authorized publishers.</p><a class="button button-primary" href="https://www.youtube.com/results?search_query='+encodeURIComponent(v.query)+'" target="_blank" rel="noopener noreferrer">Find videos on YouTube ↗</a></div>';
  modal.innerHTML='<div class="player-backdrop" data-close-player></div><section class="player-dialog"><button class="player-close" data-close-player aria-label="Close player">×</button><div class="player-frame">'+player+'</div><div class="player-caption"><div class="section-overline">'+safe(v.category)+' · '+safe(v.language)+'</div><h2>'+safe(v.title)+'</h2><p>'+safe(v.description)+'</p></div></section>';
@@ -55,6 +58,39 @@ const menuToggle=document.getElementById("menuToggle"),mainNav=document.getEleme
 if(menuToggle&&mainNav){menuToggle.addEventListener("click",()=>{const open=mainNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu")});mainNav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mainNav.classList.remove("menu-open");menuToggle.setAttribute("aria-expanded","false")}))}
 document.querySelectorAll(".mobile-bottom-nav a").forEach(a=>a.addEventListener("click",()=>document.querySelectorAll(".mobile-bottom-nav a").forEach(x=>x.classList.toggle("bottom-active",x===a))));
 document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("addVideoForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const title=document.getElementById("customVideoTitle").value.trim();
+ const raw=document.getElementById("customVideoUrl").value.trim();
+ const kind=document.getElementById("customVideoKind").value;
+ const category=document.getElementById("customVideoCategory").value;
+ const status=document.getElementById("addVideoStatus");
+ let url;try{url=new URL(raw)}catch{status.textContent="Please enter a valid URL.";return}
+ if(url.protocol!=="https:"){status.textContent="For safety, use an HTTPS video or embed URL.";return}
+ let type="iframe",src=url.href,videoId="";
+ if(/\\.(mp4|webm|ogg)(?:$|\\?)/i.test(url.pathname))type="mp4";
+ else if(/(^|\\.)youtu\\.be$/i.test(url.hostname)){videoId=url.pathname.slice(1);type="youtube";src=""}
+ else if(/(^|\\.)youtube\\.com$/i.test(url.hostname)){
+   if(url.pathname==="/watch")videoId=url.searchParams.get("v")||"";
+   else if(url.pathname.startsWith("/embed/"))videoId=url.pathname.split("/")[2]||"";
+   else if(url.pathname.startsWith("/shorts/"))videoId=url.pathname.split("/")[2]||"";
+   if(videoId){type="youtube";src=""}
+ }
+ if(type==="youtube"&&!/^[A-Za-z0-9_-]{6,20}$/.test(videoId)){status.textContent="This YouTube URL doesn't contain a valid video ID.";return}
+ if(type==="youtube")src="https://www.youtube-nocookie.com/embed/"+videoId;
+ const item={id:Date.now(),title,kind,category,language:"User added",duration:kind==="short"?"Short":"Video",description:"User-added video source. Playback depends on source permissions and embed support.",type,src,videoId,accent:"#1677e8",badge:type==="mp4"?"DIRECT VIDEO":"EMBED SOURCE"};
+ try{
+   const current=JSON.parse(localStorage.getItem("loopCustomVideos")||"[]");
+   current.unshift(item);localStorage.setItem("loopCustomVideos",JSON.stringify(current));
+ }catch{status.textContent="Could not save this video in this browser. Check available storage.";return}
+ videos.unshift(item);activeKind="all";activeCategory="";query="";
+ document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x.dataset.kind==="all"));
+ document.querySelectorAll("[data-category]").forEach(x=>x.classList.remove("category-selected"));
+ searchInput.value="";render();
+ status.textContent="Video added! It is now available on this browser. Other visitors won't see it unless you publish it to the site's shared data.";
+ e.target.reset();
+ document.getElementById(kind==="short"?"shorts":"full-videos").scrollIntoView({behavior:"smooth",block:"start"});
+});
 // If an embedded source blocks playback, offer its official YouTube page.
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IFRAME"){const frame=e.target;const fallback=document.createElement("a");fallback.className="button button-primary";fallback.href=frame.src.replace("https://www.youtube-nocookie.com/embed/","https://www.youtube.com/watch?v=").split("?")[0];fallback.target="_blank";fallback.rel="noopener noreferrer";fallback.textContent="Open video on YouTube ↗";frame.parentNode.replaceChild(fallback,frame)}},true);
 render();
