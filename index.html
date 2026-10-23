@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=afterdark-20261023">
+<link rel="stylesheet" href="assets/css/style.css?v=video-library-20261023">
 </head>
 <body>
 <header class="topbar">
@@ -40,12 +40,18 @@
     <div class="empty-state" id="emptyState" hidden>No platforms match that search. Try another name.</div>
     <p class="legal-note"><span>ⓘ</span> LOOP is a directory, not a video host. Third-party links are provided for navigation only; LOOP does not control, verify, or endorse external content. You must be 18 or older and comply with applicable laws and each platform’s terms.</p>
   </section>
+  <section class="video-library" id="video-library">
+    <div class="section-head"><div><div class="eyebrow">LATEST FROM CONNECTED SOURCES</div><h2>Video library<span>.</span></h2><p>Recent entries from configured feeds. Playback appears only when a source provides an approved embeddable player.</p></div><div class="source-count"><b id="videoCount">00</b><span>VIDEOS / POSTS</span></div></div>
+    <div class="library-tools"><label class="search-box"><span>⌕</span><input id="videoSearch" type="search" placeholder="Search video titles…" aria-label="Search video titles"></label><span id="rssStatus" class="feed-status" role="status">Loading connected sources…</span></div>
+    <div class="video-grid" id="rssGrid" aria-live="polite"><div class="rss-empty">Loading the latest catalogue…</div></div>
+    <p class="legal-note"><span>ⓘ</span> Only metadata and thumbnails are shown here. Playback is available only for videos whose publisher explicitly provides an embeddable player; otherwise use the original source link.</p>
+  </section>
   <section class="about" id="about"><div class="about-icon">L<span>+</span></div><div><div class="eyebrow">ABOUT LOOP AFTER DARK</div><h2>Less searching. More discovering.</h2><p>A lightweight directory designed for quick browsing. External sites open in a new tab, so you can return to LOOP whenever you want.</p></div><a href="#home" class="back-top">Back to top ↑</a></section>
 </main>
 <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">L</span><span>LOOP <em>AFTER DARK</em></span></a><span>EXTERNAL LINKS · ADULTS ONLY · © <b id="year"></b> LOOP</span></footer>
 <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
   <div class="gate-card"><div class="gate-logo">L<span>+</span></div><div class="eyebrow">AGE RESTRICTED</div><h2 id="gateTitle">Are you 18 or older?</h2><p>This website is a directory of external adult platforms. You must be at least 18 years old and legally allowed to view adult content in your location.</p><button class="button primary gate-yes" id="ageYes">Yes, I’m 18 or older <span>→</span></button><button class="gate-no" id="ageNo">No, take me back</button><small>Age confirmation is a self-declaration and does not verify identity or age.</small></div>
 </div>
-<script src="assets/js/app.js?v=afterdark-20261023" defer></script>
+<script src="assets/js/app.js?v=video-library-20261023" defer></script>
 </body>
 </html>
