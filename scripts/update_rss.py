@@ -38,6 +38,29 @@ def item_link(node):
                 return child.text.strip()
     return text_of(node, {"guid", "link"})
 
+def item_media(node):
+    for element in node.iter():
+        name = local_name(element.tag)
+        media_type = element.attrib.get("type", "").lower()
+        url = (element.attrib.get("url") or element.attrib.get("href") or "").strip()
+        rel = element.attrib.get("rel", "").lower()
+        if not url.startswith("https://"):
+            continue
+        if name == "enclosure" and (media_type.startswith("video/") or media_type in {"application/x-mpegurl", "application/vnd.apple.mpegurl"}):
+            return url
+        if name == "link" and rel in {"enclosure", "player"} and (media_type.startswith("video/") or rel == "player"):
+            return url
+    return ""
+
+def item_embed(node):
+    for element in node.iter():
+        name = local_name(element.tag)
+        rel = element.attrib.get("rel", "").lower()
+        url = (element.attrib.get("href") or element.attrib.get("url") or "").strip()
+        if name == "link" and rel == "player" and url.startswith("https://"):
+            return url
+    return ""
+
 def item_image(node):
     for element in node.iter():
         name = local_name(element.tag)
