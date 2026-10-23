@@ -101,3 +101,13 @@ document.getElementById("addVideoForm").addEventListener("submit",e=>{
 // If an embedded source blocks playback, offer its official YouTube page.
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IFRAME"){const frame=e.target;const fallback=document.createElement("a");fallback.className="button button-primary";fallback.href=frame.src.replace("https://www.youtube-nocookie.com/embed/","https://www.youtube.com/watch?v=").split("?")[0];fallback.target="_blank";fallback.rel="noopener noreferrer";fallback.textContent="Open video on YouTube ↗";frame.parentNode.replaceChild(fallback,frame)}},true);
 render();
+/* External adult source links: require an age confirmation before navigation. */
+let pendingAdultUrl="";
+document.querySelectorAll("[data-adult-source]").forEach(link=>link.addEventListener("click",event=>{
+ event.preventDefault();pendingAdultUrl=link.href;
+ const gate=document.getElementById("ageGate");if(gate){gate.hidden=false;document.body.classList.add("age-gate-open");document.getElementById("ageConfirm").focus();}
+}));
+const ageConfirm=document.getElementById("ageConfirm"),ageCancel=document.getElementById("ageCancel"),ageGate=document.getElementById("ageGate");
+if(ageConfirm)ageConfirm.addEventListener("click",()=>{if(pendingAdultUrl)window.open(pendingAdultUrl,"_blank","noopener,noreferrer");pendingAdultUrl="";if(ageGate)ageGate.hidden=true;document.body.classList.remove("age-gate-open")});
+if(ageCancel)ageCancel.addEventListener("click",()=>{pendingAdultUrl="";if(ageGate)ageGate.hidden=true;document.body.classList.remove("age-gate-open")});
+if(ageGate)ageGate.addEventListener("click",e=>{if(e.target===ageGate){ageGate.hidden=true;pendingAdultUrl="";document.body.classList.remove("age-gate-open")}});
