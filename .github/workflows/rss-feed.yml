@@ -1,0 +1,39 @@
+name: Refresh LOOP RSS feed
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/update_rss.py"
+      - ".github/workflows/rss-feed.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: loop-rss-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Refresh RSS catalogue
+        env:
+          RSS_FEED_URL: ${{ vars.RSS_FEED_URL }}
+        run: python3 scripts/update_rss.py
+      - name: Commit updated catalogue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/rss-feed.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh LOOP RSS catalogue"
+            git push
+          else
+            echo "No RSS changes to publish."
+          fi
