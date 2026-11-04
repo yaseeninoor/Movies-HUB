@@ -1,6 +1,6 @@
 {
   "source": "",
-  "updatedAt": "2026-11-03T23:23:57.898333+00:00",
+  "updatedAt": "2026-11-04T06:22:57.076805+00:00",
   "items": [],
   "status": "unavailable",
   "message": "Feed could not be refreshed (ValueError). Check RSS_FEED_URL and source availability."
